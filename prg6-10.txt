@@ -1,0 +1,193 @@
+6. Factorial Program 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Factorial Calculator</title>
+  <script>
+    function factorial(n) {
+      return n <= 1 ? 1 : n * factorial(n - 1);
+    }
+
+    function calculateFactorial() {
+      const n = parseInt(document.getElementById('numberInput').value);
+      const result = isNaN(n) || n < 0 ? 'Please enter a non-negative integer.' : `The factorial of ${n} is: ${factorial(n)}`;
+      document.getElementById('result').textContent = result;
+    }
+  </script>
+</head>
+<body>
+  <h1>Factorial Calculator</h1>
+  <label for="numberInput">Enter a non-negative integer:</label>
+  <input type="number" id="numberInput" min="0">
+  <button onclick="calculateFactorial()">Calculate Factorial</button>
+  <p id="result"></p>
+</body>
+</html>
+
+7. Php Program
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Calculator</title>
+</head>
+<body>
+
+<?php
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $num1 = $_POST["num1"];
+    $num2 = $_POST["num2"];
+    $operator = $_POST["operator"];
+    $result = "";
+
+    if (is_numeric($num1) && is_numeric($num2)) {
+      switch ($operator) {
+        case "+": $result = $num1 + $num2; break;
+        case "-": $result = $num1 - $num2; break;
+        case "*": $result = $num1 * $num2; break;
+        case "/": $result = $num2 != 0 ? $num1 / $num2 : "Cannot divide by zero"; break;
+        default: $result = "Invalid operator";
+      }
+    } else {
+      $result = "Please enter valid numbers";
+    }
+  }
+?>
+
+  <h1>Simple Calculator</h1>
+  <form method="post" action="">
+    <input type="text" name="num1" placeholder="Number 1" required>
+    <input type="text" name="num2" placeholder="Number 2" required>
+    <select name="operator" required>
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
+    <button type="submit">Calculate</button>
+  </form>
+
+  <?php if ($result !== "") echo "<p>Result: $result</p>"; ?>
+
+</body>
+</html>
+
+8. Php Read and Write
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Read and Write Files in PHP</title>
+</head>
+<body>
+
+<?php
+  // File path
+  $filePath = "example.txt";
+
+  // Write to a file
+  $contentToWrite = "Hello, this is a sample content!";
+  file_put_contents($filePath, $contentToWrite);
+
+  echo "<p>Content written to file successfully.</p>";
+
+  // Read from the file
+  $readContent = file_get_contents($filePath);
+
+  if ($readContent !== false) {
+    echo "<p>Content read from file:</p>";
+    echo "<pre>$readContent</pre>";
+  } else {
+    echo "<p>Error reading from file.</p>";
+  }
+?>
+
+</body>
+</html>
+
+9.Read and write 
+
+<?php
+// File path for reading and writing
+$file_path = "example.txt";
+
+// Writing to a file
+$data_to_write = "Hello, World!\nThis is a sample text to be written to the file.";
+file_put_contents($file_path, $data_to_write);
+
+echo "Data has been written to the file successfully.<br>";
+
+// Reading from a file
+$data_read = file_get_contents($file_path);
+
+echo "Data read from the file:<br>";
+echo nl2br($data_read); // nl2br() function is used to convert newlines to HTML line breaks for better display
+?>
+
+
+10. Manipulating 
+
+<?php
+
+// Database credentials
+$servername = "localhost";
+$username = "your_username";
+$password = "your_password";
+$dbname = "your_database";
+
+// Try connecting using PDO (recommended)
+try {
+  $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+  $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  echo "Connected successfully <br>";
+} catch(PDOException $e) {
+  echo "Connection failed: " . $e->getMessage();
+}
+
+// Function to insert data (replace with your table and column names)
+function insertData($name, $email) {
+  global $conn;
+  $sql = "INSERT INTO users (name, email) VALUES (?, ?)";
+  $stmt = $conn->prepare($sql);
+  $stmt->execute([$name, $email]);
+  echo "New record inserted successfully <br>";
+}
+
+// Example usage of insert function
+if (isset($_POST["name"]) && isset($_POST["email"])) {
+  $name = $_POST["name"];
+  $email = $_POST["email"];
+  insertData($name, $email);
+}
+
+?>
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<form method="post">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+  </div>
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+  </div>
+  <div class="submit">
+    <button type="submit">Insert</button>
+  </div>
+</form>
+
+</body>
+</html>
+
+
